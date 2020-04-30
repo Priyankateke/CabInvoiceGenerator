@@ -12,6 +12,7 @@ public class InvoiceServiceTest {
         invoiceService=new InvoiceService();
     }
 
+    /** Given distance and time should return total fare*/
     @Test
     public void givenDistanceAndTime_shouldReturnTotalFare() {
         double distance = 5.0;
@@ -20,11 +21,20 @@ public class InvoiceServiceTest {
         Assert.assertEquals(55.0, fare, 0.0);
     }
 
+    /** Given distance and time, if total fare is less than minimum fare should return minimum fare*/
     @Test
     public void givenDistanceAndTime_WhenTotalFareLessThanMinimumFare_shouldReturnMinimumFare() {
         double distance = 0.3;
         int time = 1;
         double fare = invoiceService.calculateFare(distance, time);
         Assert.assertEquals(5.0, fare,0.0);
+    }
+
+    /** given distance and time of multiple rides should return multiple fare*/
+    @Test
+    public void givenMultipleRides_ShouldReturnTotalFare() {
+        Ride[] rides = {new Ride(2.0,5), new Ride(0.1,1)};
+        double fare = invoiceService.calculateFare(rides);
+        Assert.assertEquals(30,fare,0.0);
     }
 }
