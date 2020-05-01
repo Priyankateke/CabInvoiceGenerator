@@ -38,4 +38,15 @@ public class InvoiceServiceTest {
         InvoiceSummery expectedInvoiceSummery = new InvoiceSummery(2,30);
         Assert.assertEquals(invoiceSummery,expectedInvoiceSummery);
     }
+
+    @Test
+    public void givenUserId_shouldReturnInvoiceSummery() {
+        String userId = "priyanka1";
+        Ride[] rides = {new Ride(2.0,5),
+                new Ride(0.1,1) };
+        invoiceService.addRides(userId,rides);
+        InvoiceSummery invoiceSummery = invoiceService.getInvoiceSummery(userId);
+        InvoiceSummery invoiceSummeryExpected = new InvoiceSummery(2,30);
+        Assert.assertEquals(invoiceSummery,invoiceSummeryExpected);
+    }
 }
